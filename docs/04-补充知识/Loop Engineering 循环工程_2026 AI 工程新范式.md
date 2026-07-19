@@ -10,41 +10,46 @@
 > 2026 年，AI 工程师的核心竞争力不再是 “写好 Prompt”，而是 “设计好 Loop”。
 
 ## 1 全网炸圈的两句话 
-1. Peter Steinberger（OpenAI，OpenClaw 创始人）
+#### 1. Peter Steinberger（OpenAI，OpenClaw 创始人）
 - 时间：2026-06-07（X/Twitter）
 - 原话： 
 - “Here's your monthly reminder that you shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents.”
 - 中文：你不该再手动给编码智能体写提示词了，你应该设计循环，让循环去驱动智能体。
-[图片]
 
-2. Boris Cherny（Anthropic，Claude Code 负责人）
+
+#### 2. Boris Cherny（Anthropic，Claude Code 负责人）
 - 时间：2026-06-02 访谈，6 月 8 日广泛传播
 - 原话： 
 - “I don’t prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops.”
 - 中文：我不再手动给 Claude 发提示词了。我有持续运行的循环，由循环去调用 Claude、判断下一步。我的工作变成了写循环。
 - 背景：Claude Code 已贡献 GitHub 约4% 公开 Commit，Anthropic 内部80%+ 生产代码由 Claude 生成。
-[图片]
 
-3. Addy Osmani（Google，Chrome/DevRel 主管）
+
+#### 3. Addy Osmani（Google，Chrome/DevRel 主管）
 - 时间：2026-06-07 博客《Loop Engineering》
 - 定位：正式命名 “Loop Engineering” 并给出框架
 - 核心观点： 
   - Loop Engineering = 把 “人在循环里” 替换成 “系统在循环里”
   - 五大模块：Automations、Worktrees、Skills、Plugins、Sub-agents
   - 人负责：目标、校验、架构、安全、成本，不再逐轮 Prompt。
-[图片]
-最近一周跟进 / 力挺的其他大佬（6 月 8～11 日）
-Matt Van Horn（知名 AI 开发者 / 投资人）：观点：整理过去 30 天 Loop 相关言论，提出： 
-- “现在最贵的不是模型，而是循环（Loops）”
-Matthew Berman（AI Coding 博主 / 投资人）
-- “Nobody knows but him and Boris.”（除了 Peter 和 Boris，没人真懂 Loop）
-Sai Rahul（sairahul1，AI 工程博主）：发布《Loops: What Every AI Engineer Needs to Know in 2026》，把 Loop 定义为2026 年 AI 工程师必备技能。
 
-半分析（SemiAnalysis，顶级 AI 研究机构）
+
+#### 最近一周跟进 / 力挺的其他大佬（6 月 8～11 日）
+
+###### Matt Van Horn（知名 AI 开发者 / 投资人）：观点：整理过去 30 天 Loop 相关言论，提出： 
+- “现在最贵的不是模型，而是循环（Loops）”
+
+###### Matthew Berman（AI Coding 博主 / 投资人）
+- “Nobody knows but him and Boris.”（除了 Peter 和 Boris，没人真懂 Loop）
+- 
+###### Sai Rahul（sairahul1，AI 工程博主）：
+发布《Loops: What Every AI Engineer Needs to Know in 2026》，把 Loop 定义为2026 年 AI 工程师必备技能。
+
+###### 半分析（SemiAnalysis，顶级 AI 研究机构）
 - “Loop Engineering 是AI 编程从‘Prompt’到‘系统设计’的关键跃迁”。
 
-InfoQ、极客公园、机器之心：连续发文，称 Loop Engineering 为“杀死提示词工程的新范式”。
-字节 / 阿里 / 百度 AI 工程团队：内部技术周报同步跟进，将 Loop 列为2026 下半年重点方向（未公开署名）。
+###### InfoQ、极客公园、机器之心：连续发文，称 Loop Engineering 为“杀死提示词工程的新范式”。
+###### 字节 / 阿里 / 百度 AI 工程团队：内部技术周报同步跟进，将 Loop 列为2026 下半年重点方向（未公开署名）。
 
 ## 2 过去三年 AI 工程师的三次范式迭代
 - 2024：Prompt Engineering 提示词工程（话术为王）
