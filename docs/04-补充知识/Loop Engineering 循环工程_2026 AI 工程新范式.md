@@ -1,6 +1,5 @@
-#Loop Engineering 循环工程：2026 AI 工程新范式
+# 《Loop Engineering 循环工程：2026 AI 工程新范式》
 
-《Loop Engineering 循环工程：2026 AI 工程范式革命》
 
 > 全文：3-4万字
 
