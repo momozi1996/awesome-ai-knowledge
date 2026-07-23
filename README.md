@@ -102,6 +102,19 @@ Open Source · MIT License
 - [07 模型评估](./docs/03-AI Agent智能体/07-模型评估.md)
 - [08 模型开源和推广方案](./docs/03-AI Agent智能体/08-模型开源和推广方案.md)
 
+### 四、Agent 工程与训练知识库
+- [00 Overview-总览]
+- [01 Core Concepts-核心概念]
+- [02 Agent Model Training-Agent 模型训练]
+- [03 Agent Data Pipeline-Agent 数据管线]
+- [04 Agent Infrastructure-Agent 基础设施]
+- [05 Harness Engineering-Harness 工程]
+- [06 Capability Engineering-Agent 能力工程]
+- [07 Knowledge Distillation-知识蒸馏]
+- [08 Evaluation & Benchmarks-评测与基准]
+- [09 Code, Data & Resources-代码、数据与资源]
+- [10 Applications & Case Studies-应用与案例]
+
 ## 仓库配套文件
 - [学习路线图](./roadmap.md)：三大领域分阶段完整学习路径
 - [贡献指南](./CONTRIBUTING.md)：文档提交规范、PR模板、新增内容标准
