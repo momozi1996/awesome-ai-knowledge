@@ -1,167 +1,65 @@
----
-title: Agent工程与训练知识库（详细版）
-category: Agent工程与训练
-tags: ["Agent工程", "MCP", "A2A", "工具调用", "Agent训练", "2026"]
-related: ["AI Agent", "LLM", "MCP协议", "Function Calling"]
-created: 2026-07-25
-updated: 2026-07-25
-version: "2026 Edition - Detailed"
-sources: ["论文", "官方技术报告", "知乎", "X", "小红书", "机器之心", "量子位"]
----
+# Agent工程与训练｜进阶知识
+> 本目录：`docs/04‑Agent工程与训练/进阶知识`
 
-# 四、Agent 工程与训练知识库（详细版）
+本套文档面向**做私有微调Agent的工程师、TPM、AI产品**，聚焦从0到1落地可生产可用的LLM‑based Agent完整工程链路。
+不只是概念科普，全部是可落地的实战流程、检查清单、决策树、避坑经验，覆盖数据集构建、蒸馏、训练脚手架、能力打磨、评测、线上故障排查、完整项目交付手册。
 
-> 从MCP协议到Agent能力工程的全链路技术体系 - 2026年最新
+> ⚠️ 阅读前置：建议先阅读【Agent基础概念与架构】章节，掌握Agent基础范式、组件、MCP基本概念；
+> 适合：已经了解Agent是什么，想要动手做、调优、上线生产级Agent的读者。
 
----
+## 📄 文档列表
+|序号|文档|主题简述|
+|---|---|---|
+|01|[01‑Core‑Concepts.md](./01‑Core‑Concepts.md)|Agent核心概念、术语定义、常见误区|
+|02|[02‑Agent‑Architecture.md](./02‑Agent‑Architecture.md)|Agent分层架构、运行闭环、模块拆解|
+|03|[03‑Agent‑Paradigm‑Evolve.md](./03‑Agent‑Paradigm‑Evolve.md)|Agent技术范式演进：ReAct → ToolLLM → SFT‑DPO微调Agent|
+|04|[04‑Agent‑Infrastructure.md](./04‑Agent‑Infrastructure.md)|Agent基础设施：LangGraph / MCP / 状态管理、运行时组件|
+|05|[05‑Harness‑Engineering.md](./05‑Harness‑Engineering.md)|训练脚手架Harness：配置、数据集预处理、Trainer、checkpoint、可复现工程实践|
+|06|[06‑Capability‑Engineering.md](./06‑Capability‑Engineering.md)|能力工程：工具调用、规划、反思纠错、能力退化定位与修复|
+|07|[07‑Knowledge‑Distillation.md](./07‑Knowledge‑Distillation.md)|Agent知识蒸馏：轨迹蒸馏、偏好蒸馏、prompt工程、过滤质检、避坑|
+|08|[08‑Evaluation‑Benchmarking.md](./08‑Evaluation‑Benchmarking.md)|Agent完整评测体系：离线测试集、客观指标、LLM‑as‑Judge、人工评测、版本门禁|
+|09|[09‑Production‑Troubleshooting.md](./09‑Production‑Troubleshooting.md)|生产故障排查：故障分类、排查决策树、典型案例、应急回退、case归档SOP|
+|10|[10‑Agent‑Project‑Playbook.md](./10‑Agent‑Project‑Playbook.md)|Agent项目实战手册：完整生命周期、里程碑、风险、交付物清单|
 
-## 📚 知识库结构
-
-本知识库采用 **11章深度结构**，覆盖Agent工程从概念到落地的完整链路：
-
-| 章节 | 名称 | 核心内容 |
-|------|------|---------|
-| **00** | [[00-Overview-总览]] | Agent工程全景图、技术栈概览 |
-| **01** | [[01-Core-Concepts-核心概念]] | Agent定义、架构模式、关键术语 |
-| **02** | [[02-Agent-Model-Training-Agent模型训练]] | Agent模型训练方法、SFT、RLHF |
-| **03** | [[03-Agent-Data-Pipeline-Agent数据管线]] | 数据采集、合成、清洗、标注 |
-| **04** | [[04-Agent-Infrastructure-Agent基础设施]] | 部署、推理、服务化、监控 |
-| **05** | [[05-Harness-Engineering-Harness工程]] | 工具调用框架、MCP、A2A协议 |
-| **06** | [[06-Capability-Engineering-Agent能力工程]] | 规划、记忆、工具使用、多Agent协作 |
-| **07** | [[07-Knowledge-Distillation-知识蒸馏]] | 教师模型蒸馏、能力迁移 |
-| **08** | [[08-Evaluation-Benchmarks-评测与基准]] | AgentBench、评估方法、指标体系 |
-| **09** | [[09-Code-Data-Resources-代码数据与资源]] | 开源代码、数据集、工具链 |
-| **10** | [[10-Applications-Case-Studies-应用与案例]] | 实际应用、成功案例、最佳实践 |
-
----
-
-## 🎯 2026年Agent工程热点
-
-### MCP协议（Model Context Protocol）
-- **发布时间**：2024年11月（Anthropic）
-- **2026年状态**：成为行业标准
-- **核心概念**：标准化工具调用协议
-- **国产支持**：阿里云、字节跳动已适配
-
-### A2A协议（Agent-to-Agent）
-- **发布时间**：2025年（Google）
-- **2026年状态**：多Agent协作标准
-- **核心概念**：Agent间通信协议
-- **应用场景**：多Agent系统、Agent市场
-
-### 热门工具与框架
-
-| 工具/框架 | 厂商 | 特点 | 2026年状态 |
-|-----------|------|------|-----------|
-| **Claude Code** | Anthropic | AI编程助手 | ⭐ 热门 |
-| **Cursor** | Anysphere | AI IDE | ⭐⭐ 现象级 |
-| **Windsurf** | Codeium | AI编辑器 | ⭐ 热门 |
-| **Trae** | 字节跳动 | 国产AI IDE | ⭐ 新兴 |
-| **Cline** | Open source | VS Code插件 | ⭐ 开源热门 |
-| **OpenManus** | 开源社区 | 国产Manus复现 | ⭐⭐ 爆火 |
-| **OWL** | 开源社区 | 多Agent框架 | ⭐ 新兴 |
-
----
-
-## 📊 技术栈全景图
-
+## 🧩 知识链路（阅读顺序建议）
 ```
-Agent工程与训练
-├── 基础层
-│   ├── LLM基座模型
-│   ├── 工具调用能力（Function Calling）
-│   └── 多模态理解
-├── 协议层
-│   ├── MCP（Model Context Protocol）
-│   ├── A2A（Agent-to-Agent）
-│   └── OpenAPI/REST API
-├── 框架层
-│   ├── LangChain / LangGraph
-│   ├── LlamaIndex
-│   ├── CrewAI
-│   └── AutoGPT
-├── 能力层
-│   ├── 规划（Planning）
-│   ├── 记忆（Memory）
-│   ├── 工具使用（Tool Use）
-│   └── 自我反思（Self-reflection）
-└── 应用层
-    ├── 编程助手
-    ├── 自动化办公
-    ├── 智能客服
-    └── 内容创作
+核心概念 → 架构 → 范式演进 → 基础设施
+↓
+训练脚手架开发 → 数据集&蒸馏
+↓
+能力打磨调优 → 完整评测体系
+↓
+生产故障排查 → 完整项目交付手册
 ```
 
----
+> 💡 如果你只想解决某个具体问题，可以直接跳读对应文档：
+> - 数据集怎么做 → 07‑Knowledge‑Distillation
+> - Agent线上出问题如何排查 → 09‑Production‑Troubleshooting
+> - 怎么做评测、版本门禁 → 08‑Evaluation‑Benchmarking
+> - 从零启动一个Agent项目完整流程 → 10‑Agent‑Project‑Playbook
 
-## 🔥 2026年社区动态
+## 🎯 核心设计思想
+1. **重工程落地**：不只讲算法理论，大量可复制的SOP、检查清单、决策树。
+2. **重视可复现性**：强调数据集版本、实验元数据、训练‑推理一致性，这是Agent项目最大坑点。
+3. **分层定位问题**：遇到坏case优先区分：工程bug / 数据集问题 / 模型能力上限 / 分布偏移，不要盲目堆样本。
+4. **闭环思维**：Agent不是训练一次就结束，是「线上case回流‑数据集迭代‑训练‑评测‑上线」持续迭代闭环。
 
-### 小红书热门
-- #Agent工程 话题 3亿+阅读
-- #MCP协议 8000万+阅读
-- #AI编程 10亿+阅读
-- 热门笔记：《Cursor+Claude Code工作流》200万赞
+## 🔔 重要提醒
+1. 微调不会凭空创造基座模型不具备的能力，只能对齐行为范式。
+2. **训练‑推理不一致**是线上故障最高发来源，上线前务必执行完整核对清单。
+3. 评测不能只看loss；Agent是交互式闭环，必须跑完整闭环做评测。
+4. 分布外OOD场景优先运行时/编排兜底，不要盲目灌入训练集污染数据集。
 
-### X（Twitter）技术讨论
-- @Anthropic MCP发布：转发5万+
-- @Google A2A协议：转发3万+
-- @机器之心Agent盘点：转发2万+
+## 📌 后续规划
+后续计划补充文档：
+- Agent安全与对齐
+- Multi‑Agent多智能体工程实践
+- Agent OS 前沿研究与工程现状
+- MCP深度实践案例
 
-### 知乎深度分析
-- 《MCP协议技术解析》1.5万+赞同
-- 《Agent工程最佳实践》1万+赞同
-- 《2026年Agent框架选型》8000+赞同
-
----
-
-## 🚀 快速导航
-
-### 按角色导航
-
-**如果你是Agent开发者**：
-→ [[01-Core-Concepts-核心概念]] → [[05-Harness-Engineering-Harness工程]] → [[09-Code-Data-Resources-代码数据与资源]]
-
-**如果你是Agent训练师**：
-→ [[02-Agent-Model-Training-Agent模型训练]] → [[03-Agent-Data-Pipeline-Agent数据管线]] → [[07-Knowledge-Distillation-知识蒸馏]]
-
-**如果你是平台工程师**：
-→ [[04-Agent-Infrastructure-Agent基础设施]] → [[06-Capability-Engineering-Agent能力工程]] → [[08-Evaluation-Benchmarks-评测与基准]]
-
-**如果你是产品经理**：
-→ [[00-Overview-总览]] → [[10-Applications-Case-Studies-应用与案例]] → [[08-Evaluation-Benchmarks-评测与基准]]
+## 📝 贡献
+欢迎补充issue、PR，补充实践踩坑、案例、指标、最佳实践。
 
 ---
-
-## 📖 学习路径建议
-
-### 初级（入门）
-1. [[00-Overview-总览]]
-2. [[01-Core-Concepts-核心概念]]
-3. [[10-Applications-Case-Studies-应用与案例]]
-
-### 中级（进阶）
-4. [[05-Harness-Engineering-Harness工程]]
-5. [[06-Capability-Engineering-Agent能力工程]]
-6. [[09-Code-Data-Resources-代码数据与资源]]
-
-### 高级（精通）
-7. [[02-Agent-Model-Training-Agent模型训练]]
-8. [[03-Agent-Data-Pipeline-Agent数据管线]]
-9. [[07-Knowledge-Distillation-知识蒸馏]]
-10. [[04-Agent-Infrastructure-Agent基础设施]]
-11. [[08-Evaluation-Benchmarks-评测与基准]]
-
----
-
-## 🔗 相关链接
-
-- [[../03-AIAgent智能体/README]] - Agent智能体基础
-- [[../01-大语言模型LLM/README]] - LLM基础
-- [[../02-多模态AIGC/README]] - 多模态AIGC
-
----
-
-> 📌 **更新日志**
-> - 2026-07-25: 创建详细版11章结构
-> 
-> 🎯 **质量保证**：基于2026年最新技术动态，持续更新中
+> 本系列属于 [awesome‑ai‑knowledge](https://github.com/momozi1996/awesome‑ai‑knowledge) 知识库，MIT License。
+```
